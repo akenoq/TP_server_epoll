@@ -24,23 +24,20 @@ def cont_type(path):
     f_type = path.split('.')[-1]
     if f_type in resp_src.TYPES:
         return resp_src.TYPES[f_type]
-    else:
-        return ''
+    return ''
 
 
 def handle(req, resp, root_dir):
     # debug_print("\n_HANDLE")
 
-    resp.code = resp_src.STATUS['NOT_FOUND']
-
     host_path = os.path.normpath(root_dir + req.path)
     if os.path.commonprefix([host_path, root_dir]) != root_dir:
-        return resp.build()
+        return
 
     host_path_index = os.path.join(host_path, resp_src.INDEX_PAGE)
     if os.path.isfile(host_path_index):
         host_path = host_path_index
-    elif os.path.exists(os.path.join(host_path)):
+    elif os.path.exists(host_path):
         resp.code = resp_src.STATUS['FORBIDDEN']
     try:
         f = open(host_path, 'rb')
