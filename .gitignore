@@ -1,5 +1,5 @@
 .idea
 __pycache__
 */perf
+*.pyc
 .git_old
-

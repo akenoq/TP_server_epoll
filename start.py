@@ -13,7 +13,7 @@ config = {
     'cpu': os.cpu_count(),
     'rdir': '/var/www/html',
     'listeners': 128,
-    'port': 5933
+    'port': 80
 }
 
 
