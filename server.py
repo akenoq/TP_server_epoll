@@ -45,7 +45,12 @@ def child_proc(sock, rdir):
                 elif eventmask & select.EPOLLIN:
                     debugger.log("EVENT IN = {} FD = {}".format(eventmask, fileno))
                     cl_conn = connections[fileno]
-                    requests[fileno] = cl_conn.recv(buf_size)
+
+                    l = buf_size
+                    while l == buf_size:
+                        data = cl_conn.recv(buf_size)
+                        requests[fileno] += data
+                        l = len(data)
 
                     if len(requests[fileno].strip()) == 0:
                         epoll.unregister(fileno)

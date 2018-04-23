@@ -10,7 +10,7 @@ import server
 config_path = '/etc/httpd.conf'
 
 config = {
-    'cpu': os.cpu_count(),
+    'cpu': 2,
     'rdir': '/var/www/html',
     'listeners': 128,
     'port': 80
